@@ -1,26 +1,11 @@
 import mongoose from "mongoose";
-import User from "./user.model";
-import Song from "./song.model";
 
-const PlaylistSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: User,
-        require: true
-    },
-    name: {
-        type: String,
-        require: true
-    },
-    description: { type: String},
-    songId: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: Song
-        }
-    ]
-}, {timestamps: true})
+const playlistSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    description: { type: String },
+    songIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }]
+}, { timestamps: true, collection: "playlists" });
 
-const Playlist = mongoose.models.playlists || mongoose.model("playlists", PlaylistSchema)
-
-export default Playlist
+const Playlist = mongoose.models.Playlist || mongoose.model("Playlist", playlistSchema);
+export default Playlist;
