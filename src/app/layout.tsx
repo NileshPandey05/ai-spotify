@@ -6,6 +6,7 @@ import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import { cookies } from 'next/headers'
 import {jwtDecode} from 'jwt-decode'
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,7 +64,9 @@ export default async function RootLayout({
         <AuthProvider initialUser={user}>
         {children}
         </AuthProvider>
-      </StackTheme></StackProvider></body>
+      </StackTheme></StackProvider>
+      <Toaster position="top-center" richColors />
+      </body>
     </html>
   );
 }
